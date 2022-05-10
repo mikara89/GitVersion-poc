@@ -24,6 +24,7 @@ steps:
     displayName: "Calculate SemVer"
     inputs:
       useConfigFile: true
+      configFilePath: '$(Build.SourcesDirectory)/GitVersion.yml'
   
   - script: echo current version is $(GitVersion.SemVer)
     displayName: "Display calculated version"
