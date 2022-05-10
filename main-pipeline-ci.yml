@@ -4,7 +4,9 @@
 # https://aka.ms/yaml
 
 trigger:
-  - main
+  branches:
+    include:
+      - main
 
 pool:
   vmImage: ubuntu-latest
@@ -20,17 +22,21 @@ steps:
 
   - task: gitversion/execute@0
     displayName: "Calculate SemVer"
+    inputs:
+      useConfigFile: true
+      configFilePath: "$(Build.SourcesDirectory)/GitVersion.yml"
+
   - script: echo current version is $(GitVersion.SemVer)
     displayName: "Display calculated version"
 
   - task: GitHubRelease@1
     inputs:
-      gitHubConnection: 'github.com_mikara89'
-      repositoryName: 'mikara89/test'
-      action: 'create'
-      target: '$(Build.SourceVersion)'
-      tagSource: 'userSpecifiedTag'
-      tag: '$(GitVersion.SemVer)'
+      gitHubConnection: "github.com_mikara89"
+      repositoryName: "mikara89/test"
+      action: "create"
+      target: "$(Build.SourceVersion)"
+      tagSource: "userSpecifiedTag"
+      tag: "$(GitVersion.SemVer)"
       isDraft: true
-      changeLogCompareToRelease: 'lastFullRelease'
-      changeLogType: 'commitBased'
+      changeLogCompareToRelease: "lastFullRelease"
+      changeLogType: "commitBased"
