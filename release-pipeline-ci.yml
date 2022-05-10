@@ -1,0 +1,34 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+  - release/*
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - script: echo Hello, world!
+    displayName: "Run a one-line script"
+
+  - task: gitversion/setup@0
+    displayName: "Install GitTools"
+    inputs:
+      versionSpec: "5.3.x"
+
+  - task: gitversion/execute@0
+    displayName: "Calculate SemVer"
+  - script: echo current version is $(GitVersion.SemVer)
+    displayName: "Display calculated version"
+
+  - task: GitHubRelease@1
+    inputs:
+      gitHubConnection: "github.com_mikara89"
+      repositoryName: "mikara89/test"
+      action: "create"
+      target: "$(Build.SourceVersion)"
+      tagSource: "userSpecifiedTag"
+      tag: "$(GitVersion.SemVer)"
+      addChangeLog: false
