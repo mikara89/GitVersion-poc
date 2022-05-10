@@ -25,10 +25,12 @@ steps:
 
   - task: GitHubRelease@1
     inputs:
-      gitHubConnection: "github.com_mikara89"
-      repositoryName: "mikara89/test"
-      action: "create"
-      target: "$(Build.SourceVersion)"
-      tagSource: "userSpecifiedTag"
-      tag: "$(GitVersion.SemVer)"
-      addChangeLog: false
+      gitHubConnection: 'github.com_mikara89'
+      repositoryName: 'mikara89/test'
+      action: 'create'
+      target: '$(Build.SourceVersion)'
+      tagSource: 'userSpecifiedTag'
+      tag: '$(GitVersion.SemVer)'
+      isDraft: true
+      changeLogCompareToRelease: 'lastFullRelease'
+      changeLogType: 'commitBased'
