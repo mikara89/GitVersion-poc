@@ -20,6 +20,9 @@ steps:
 
   - task: gitversion/execute@0
     displayName: "Calculate SemVer"
+    inputs:
+      useConfigFile: true
+    
   - script: echo current version is $(GitVersion.SemVer)
     displayName: "Display calculated version"
 
