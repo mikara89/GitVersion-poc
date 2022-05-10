@@ -2,5 +2,5 @@ next-version: 0.1.0
 branches: {}
 ignore:
   sha: []
-merge-message-formats: {}   
+merge-message-formats: {}    
  
