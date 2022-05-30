@@ -35,6 +35,6 @@ stages:
                   echo $A1
                   echo =======TEXT=========
               env:
-                  A1: '${{ parameters.apps.app_api[0] }}'
+                  A1: '${{ parameters.apps[app_api][0] }}'
               name: MigrateTask
               displayName: 'Migrate Task'
