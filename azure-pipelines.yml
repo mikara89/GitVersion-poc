@@ -5,9 +5,9 @@ parameters:
       type: object
       default: 
         - name: app_api
-          default: db-insight-app-api-image
+          value: db-insight-app-api-image
         - name: app_api2
-          default: db-insight-app-api-image
+          value: db-insight-app-api-image
         # - name: qlik_saas
         #   default: 
         #   - db-qlik-saas-service-image
