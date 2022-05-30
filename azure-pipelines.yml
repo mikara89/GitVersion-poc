@@ -1,0 +1,40 @@
+trigger: none
+
+parameters:
+    - name: apps
+      type: object
+      default: 
+        - name: app-api
+          default: 
+          - db-insight-app-api-image
+          - azapp-insight-app-api-staging
+          - 1.0.0-beta.1
+        - name: qlik-saas
+          default: 
+          - db-qlik-saas-service-image
+          - azapp-insight-app-api-staging
+          - 1.0.0-beta.1
+        - name: migrations
+          default:
+          - db-insight-migrations-image
+          - none
+          - 1.0.0-beta.1
+
+stages:  
+    - stage: DbMigrate
+      displayName: DB Migrate stage             
+      jobs:
+          - job: Migrate
+            displayName: Migrate
+            pool:
+              vmImage: 'ubuntu-latest'
+            steps:
+            - script: |
+                  set -e
+                  echo =======TEXT=========
+                  echo $A1
+                  echo =======TEXT=========
+              env:
+                  A1: '${{ parameters.apps.app-api[0] }}'
+              name: MigrateTask
+              displayName: 'Migrate Task'
