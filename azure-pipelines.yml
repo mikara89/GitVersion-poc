@@ -4,10 +4,8 @@ parameters:
     - name: apps
       type: object
       default: 
-        - app_api:
-          - db-insight-app-api-image
-          - azapp-insight-app-api-staging
-          - 1.0.0-beta.1
+        - name: app_api
+          a: db-insight-app-api-image
         # - name: qlik_saas
         #   default: 
         #   - db-qlik-saas-service-image
@@ -34,6 +32,6 @@ stages:
                   echo $A1
                   echo =======TEXT=========
               env:
-                  A1: '${{ parameters.apps[0][0] }}'
+                  A1: '${{ parameters.apps[0] }}'
               name: MigrateTask
               displayName: 'Migrate Task'
