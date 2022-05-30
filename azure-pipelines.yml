@@ -5,9 +5,9 @@ parameters:
       type: object
       default: 
         - name: app_api
-          a: db-insight-app-api-image
+          default: db-insight-app-api-image
         - name: app_api2
-          a: db-insight-app-api-image
+          default: db-insight-app-api-image
         # - name: qlik_saas
         #   default: 
         #   - db-qlik-saas-service-image
@@ -36,6 +36,5 @@ stages:
                   echo =======TEXT=========
               env:
                   A1: '${{ parameters.apps.app_api }}'
-                  A2: '${{ parameters.apps.app_api.a }}'
               name: MigrateTask
               displayName: 'Migrate Task'
